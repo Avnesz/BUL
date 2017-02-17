@@ -1,0 +1,38 @@
+html {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	height: 100%;
+}
+body {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	min-height: 100%;
+	overflow: hidden;
+}
+.hidden {
+	display: none;
+}
+
+
+/**
+* Admin
+**/
+.adminPage li {
+    list-style: none;
+}
+.adminPage li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+.adminPage table {
+    border-collapse: collapse;
+}
+.adminPage th {
+    background-color: blue;
+    color: white;
+}
+.adminPage table,th,td {
+    border: 1px solid black;
+    text-align: center;
+}
