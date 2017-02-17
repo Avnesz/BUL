@@ -32,7 +32,10 @@ html, body {
 .menu-cadre {
 	height: 50vh;
 	width: 50vw;
-	border: 1px solid black;
+	
+	background-image: url("../img/bulle.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .menu-content {
     margin-top: 20vh;
