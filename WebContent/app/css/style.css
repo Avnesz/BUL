@@ -1,18 +1,58 @@
-html {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	height: 100%;
-}
-body {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	min-height: 100%;
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
 	overflow: hidden;
 }
-.hidden {
-	display: none;
+.container-fluid {
+	width: 100vw;
+	height: 100vh;
+	padding: 0;
 }
 
+/**
+* Main
+**/
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100vw;
+    height: 10vh;
+}
+.copyright {
+	position: absolute;
+    bottom: 0;
+    line-height: 0.5vh;
+}
+
+/**
+* Menu
+**/
+.menu-cadre {
+	height: 50vh;
+	width: 50vw;
+	border: 1px solid black;
+}
+.menu-content {
+    margin-top: 20vh;
+    transform: translateY(-20%);
+}
+.menu-input {
+	width: 25vw;
+	margin-bottom: 3%;
+}
+.menu-buttons {
+	width: 25vw;
+}
+
+/**
+* Utils
+**/
+.vertical-cadre {
+	margin-top: 50vh;
+    transform: translateY(-50%);
+}
 
 /**
 * Admin
