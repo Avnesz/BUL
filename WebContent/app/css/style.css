@@ -5,54 +5,51 @@ html, body {
 	height: 100vh;
 	overflow: hidden;
 }
-.container-fluid {
+.page {
+	position: absolute;
 	width: 100vw;
 	height: 100vh;
-	padding: 0;
-}
-
-/**
-* Main
-**/
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100vw;
-    height: 10vh;
-}
-.copyright {
-	position: absolute;
-    bottom: 0;
-    line-height: 0.5vh;
 }
 
 /**
 * Menu
 **/
+.menu-page {
+	background-image: url("../img/menu-fond.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
 .menu-cadre {
-	height: 50vh;
-	width: 50vw;
+	width: 75%;
+	height: 80%;
 	
 	background-image: url("../img/bulle.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	background-position: 50%;
 }
 .menu-content {
-    margin-top: 20vh;
-    transform: translateY(-20%);
+	width: 25%;
+	height: 50%;
 }
-.menu-input {
-	width: 25vw;
-	margin-bottom: 3%;
+.menu-item {
+	margin-bottom: 5%;
 }
-.menu-buttons {
-	width: 25vw;
+.menu-button {
+	width: 48%;
 }
 
 /**
 * Utils
 **/
-.vertical-cadre {
+.h-center {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+}
+.v-center {
 	margin-top: 50vh;
     transform: translateY(-50%);
 }
