@@ -61,6 +61,18 @@ function($, _, Utils, page, AdminModel, CheckTrackView) {
 					}
 				}, "POST");
 			});
+			$("#restore").click(function() {
+				that.model.setMdp($("#mdp").val());
+				Utils.load("admin/restore", that.model.data, function(data) {
+					$("#message").text(data.message);
+					console.log(data.codeRetour);
+					if (data.codeRetour != 0) {
+						$("#message").attr("class", "alert alert-danger");
+					}else {
+						$("#message").attr("class", "alert alert-success");
+					}
+				}, "POST");
+			});
 		};
 		
 		this.init();

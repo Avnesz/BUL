@@ -1,4 +1,4 @@
-package servlet.admin.refresh;
+package servlet.admin.restore;
 
 import java.io.IOException;
 
@@ -6,14 +6,15 @@ import javax.servlet.ServletException;
 
 import servlet.abstrait.AbstractServlet;
 import servlet.abstrait.GeneralResponse;
+import bdd.UserDAO;
 
 /**
- * Controller d'administration permettant de rafraichir le contexte de l'application
+ * Controller d'administration permettant de restaurer le contexte de l'application
  * 
  * @author Snes
  * 
  */
-public class RefreshServlet extends AbstractServlet<String, GeneralResponse> {
+public class RestoreServlet extends AbstractServlet<String, GeneralResponse> {
     private static final long serialVersionUID = -4647019705021722992L;
 
     @Override
@@ -24,8 +25,11 @@ public class RefreshServlet extends AbstractServlet<String, GeneralResponse> {
     @Override
     protected GeneralResponse doPost(final String request) throws ServletException, IOException {
         final GeneralResponse response = new GeneralResponse();
+
+        UserDAO.getInstance().restore();
+
         response.setCodeRetour(0);
-        response.setMessage("Le site a ete rafraichie avec les nouvelles donnees");
+        response.setMessage("Le site a ete restauré avec les nouvelles donnees");
         return response;
     }
 

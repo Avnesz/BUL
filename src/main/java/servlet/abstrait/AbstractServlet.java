@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utils.Constantes;
 import utils.Logger;
+import utils.SessionUtils;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -26,14 +26,9 @@ import com.google.gson.JsonSyntaxException;
  * @param <RESP>
  *            Reponse
  */
-public abstract class AbstractServlet<REQ, RESP> extends HttpServlet {
+public abstract class AbstractServlet<REQ, RESP> extends SessionUtils {
 	private static final long serialVersionUID = -2106602941142608141L;
 	private static Logger LOGGER = new Logger(AbstractServlet.class.getName());
-
-	/**
-	 * Requete http
-	 */
-	protected HttpServletRequest httpRequest;
 
 	/**
 	 * Requete GET avec un formalisme epuré

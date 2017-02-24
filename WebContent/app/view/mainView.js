@@ -2,14 +2,16 @@
 define(["jquery",
         'underscore',
         "app/utils/utils",
-        "text!app/template/main.html"], 
-function($, _, Utils, page) {
+        "text!app/template/main.html",
+        "app/model/menu/connexionModel"], 
+function($, _, Utils, page, ConnexionModel) {
 	'use strict';
 
 	return function() {
 		this.init = function() {
 			this.el = $("#app");
-			Utils.load("connect", {"where" : "Connexion"}, function(data) {}, "POST");
+			this.model = new ConnexionModel();
+			Utils.load("track", {"where" : "Menu"}, function(data) {}, "POST");
 			this.render();
 		};
 
@@ -23,6 +25,33 @@ function($, _, Utils, page) {
 		};
 		
 		this.checkEvents = function() {
+			var that = this;
+			$("#connexion").click(function() {
+				var errorMessage = that.model.validate();
+				if (errorMessage) {
+					that.showMsg(errorMessage);
+				}else {
+					that.hideMsg();
+					that.model.send(function(data) {
+						if (data.codeRetour != 0) {
+							that.showMsg(data.message);
+						}else {
+							console.log("success");
+						}
+					});
+				}
+			});
+			$("#inscription").click(function() {
+				
+			});
+		};
+		
+		this.showMsg = function(message) {
+			$("#menu-error-msg").text(message);
+			$("#menu-error-msg").show();
+		};
+		this.hideMsg = function() {
+			$("#menu-error-msg").hide();
 		};
 		
 		this.init();
