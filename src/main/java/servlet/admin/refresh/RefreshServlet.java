@@ -26,10 +26,10 @@ public class RefreshServlet extends AbstractServlet<String, GeneralResponse> {
     protected GeneralResponse doPost(final String request) throws ServletException, IOException {
         final GeneralResponse response = new GeneralResponse();
 
-        UserDAO.getInstance().save();
+        UserDAO.getInstance().refresh();
 
         response.setCodeRetour(0);
-        response.setMessage("Le site a ete sauvegardé avec les nouvelles donnees");
+        response.setMessage("Le site a ete sauvegardï¿½ avec les nouvelles donnees");
         return response;
     }
 
