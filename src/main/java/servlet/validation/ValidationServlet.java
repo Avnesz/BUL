@@ -39,15 +39,15 @@ public class ValidationServlet extends AbstractServlet<ValidationServletRequest,
 
 			final ComplexUser user = UserDAO.getInstance().getUser(request.getMail());
 			if (user == null) {
-				throw new GeneralException(1, "Cet email est inconnu, merci de vous inscrire en premier lieu.");
+				throw new GeneralException(2, "Cet email est inconnu, merci de vous inscrire en premier lieu.");
 			}
 
 			if (user.isVerified()) {
-				throw new GeneralException(1, "Votre email est deja valide, vous pouvez vous connecter.");
+				throw new GeneralException(3, "Votre email est deja valide, vous pouvez vous connecter.");
 			}
 
 			if (!validator.checkToken(user, request.getToken())) {
-				throw new GeneralException(1, "Votre email est deja valide, vous pouvez vous connecter.");
+				throw new GeneralException(4, "Votre email est deja valide, vous pouvez vous connecter.");
 			}
 
 			user.setVerified(true);

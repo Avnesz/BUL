@@ -10,6 +10,7 @@ import servlet.abstrait.GeneralException;
 import servlet.abstrait.GeneralResponse;
 import utils.Constantes;
 import utils.Logger;
+import utils.MailUtils;
 import utils.TokenUtils;
 import bdd.UserDAO;
 import bean.ComplexUser;
@@ -64,6 +65,7 @@ public class InscriptionServlet extends AbstractServlet<InscriptionServletReques
 		user.setVerifToken(TokenUtils.getInstance().generateToken(null));
 		user.setVerified(false);
 		UserDAO.getInstance().saveUser(user);
+		MailUtils.getInstance().sendVerifMail(user.getMail(), user.getVerifToken());
 	}
 
 	@Override
