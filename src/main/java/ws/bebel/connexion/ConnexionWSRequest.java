@@ -1,14 +1,13 @@
-package servlet.inscription;
+package ws.bebel.connexion;
 
 /**
- * Requete d'inscription
+ * Requete du WS de connexion bebel
  * 
- * @author Mayitabel
- * 
+ * @author snesztler
+ *
  */
-public class InscriptionServletRequest {
+public class ConnexionWSRequest {
     private String login;
-    private String mail;
     private String mdp;
 
     /**
@@ -24,21 +23,6 @@ public class InscriptionServletRequest {
      */
     public void setLogin(final String login) {
         this.login = login;
-    }
-
-    /**
-     * @return the mail
-     */
-    public String getMail() {
-        return mail;
-    }
-
-    /**
-     * @param email
-     *            the mail to set
-     */
-    public void setMail(final String mail) {
-        this.mail = mail;
     }
 
     /**
