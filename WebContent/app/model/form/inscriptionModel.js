@@ -15,34 +15,32 @@ function(Utils) {
 		this.validate = function() {
 			var mdp = $("#mdp").val();
 			
-			var errorMessage = "";
-			
 			// Contient une majuscule
 			if (!/^(?=.*[A-Z]).*$/.test(mdp)) {
-				errorMessage += "Votre mot de passe doit contenir au moins une majuscule.<br/>";
+				return "Votre mot de passe doit contenir au moins une majuscule.";
 			}
 			// Contient une minuscule
 			if (!/^(?=.*[a-z]).*$/.test(mdp)) {
-				errorMessage += "Votre mot de passe doit contenir au moins une minuscule.<br/>";
+				return "Votre mot de passe doit contenir au moins une minuscule.<br/>";
 			}
 			// Contient un chiffre
 			if (!/^(?=.*\d).*$/.test(mdp)) {
-				errorMessage += "Votre mot de passe doit contenir au moins un chiffre.<br/>";
+				return "Votre mot de passe doit contenir au moins un chiffre.<br/>";
 			}
 			// Fait minimum 10 caracteres
 			if (mdp.length < 10) {
-				errorMessage += "Votre mot de passe doit faire au minimum 10 caracteres.";
+				return "Votre mot de passe doit faire au minimum 10 caracteres.";
 			}
 			
-			return errorMessage;
+			return null;
 		};
 		
 		this.send = function(successFunc) {
 			this.data.login = $("#login").val();
 			this.data.mail = $("#mail").val();
 			this.data.verifMail = $("#verifMail").val();
-			this.data.mdp = $("#mdp").val();
-			this.data.verifMdp = $("#verifMdp").val();
+			this.data.mdp = Utils.hash($("#mdp").val());
+			this.data.verifMdp = Utils.hash($("#verifMdp").val());
 			Utils.load("../Bebel/subscribe", this.data, successFunc);
 		};
 	};

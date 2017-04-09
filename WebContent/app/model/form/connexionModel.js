@@ -11,7 +11,7 @@ function(Utils) {
 		
 		this.send = function(successFunc) {
 			this.data.login = $("#login").val();
-			this.data.mdp = $("#mdp").val();
+			this.data.mdp = Utils.hash($("#mdp").val());
 			Utils.load("connexion", this.data, successFunc);
 		};
 	};

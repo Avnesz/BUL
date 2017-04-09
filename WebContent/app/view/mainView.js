@@ -22,7 +22,6 @@ function($, _, Utils, page, ConnexionView) {
 			var template = _.template(page);
 			var templateData = {};
 			this.el.html(template(templateData));
-			
 		};
 		
 		this.init();

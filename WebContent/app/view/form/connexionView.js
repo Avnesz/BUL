@@ -2,11 +2,12 @@
 define(["jquery",
         'underscore',
         "app/utils/utils",
+        "app/utils/viewUtils",
         "app/utils/messageUtils",
         "text!app/template/form/connexion.html",
         "app/model/form/connexionModel",
         "app/view/form/inscriptionView"], 
-function($, _, Utils, MessageUtils, page, Model, InscriptionView) {
+function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView) {
 	'use strict';
 
 	return function(parent) {
@@ -21,6 +22,7 @@ function($, _, Utils, MessageUtils, page, Model, InscriptionView) {
 			var template = _.template(page);
 			var templateData = {};
 			this.el.html(template(templateData));
+			ViewUtils.verticalCenter();
 			
 			this.checkEvents();
 		};
@@ -28,10 +30,10 @@ function($, _, Utils, MessageUtils, page, Model, InscriptionView) {
 		this.checkEvents = function() {
 			var that = this;
 			$("#connexion").click(function() {
-				MessageUtils.hideError();
+				MessageUtils.hide();
 				that.model.send(function(data) {
 					if (data.codeRetour != 0) {
-						MessageUtils.showError(data.message);
+						MessageUtils.show(data.message, "danger");
 					}else {
 						console.log("success");
 					}
@@ -45,9 +47,12 @@ function($, _, Utils, MessageUtils, page, Model, InscriptionView) {
 			});
 		};
 		
-		this.show = function() {
+		this.show = function(message) {
 			Utils.load("track", {"where" : "Menu de connexion"}, function(data) {}, "POST");
 			this.render();
+			if (message) {
+				MessageUtils.show(message, "success");
+			}
 		};
 		
 		this.init(parent);

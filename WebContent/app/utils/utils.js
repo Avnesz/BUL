@@ -1,5 +1,5 @@
 'use strict';
-define(["jquery"], function($){
+define(["jquery", "sha"], function($, sha){
 	return {
 		name : "bebelBUL",
 		
@@ -35,6 +35,11 @@ define(["jquery"], function($){
 		
 		decode : function(str) {
 			return atob(str);
+		},
+		
+		hash : function(str) {
+			str = "JHGKJHGjhkgkhjgxcvkjgKHJGJH4455456s4dfsdfkhgHJKGJHGdckldsjvkljklLHKH54654" + str + "sdfqsHJGKJGHG5465564HJGHJFJHGJHG23465dfgdfg34654GHFHGF";
+			return sha.sha256(str);
 		}
 	};
 });

@@ -2,10 +2,11 @@
 define(["jquery",
         'underscore',
         "app/utils/utils",
+        "app/utils/viewUtils",
         "app/utils/messageUtils",
         "text!app/template/form/inscription.html",
         "app/model/form/inscriptionModel"], 
-function($, _, Utils, MessageUtils, page, Model) {
+function($, _, Utils, ViewUtils, MessageUtils, page, Model) {
 	'use strict';
 
 	return function(parent) {
@@ -20,6 +21,7 @@ function($, _, Utils, MessageUtils, page, Model) {
 			var template = _.template(page);
 			var templateData = {};
 			this.el.html(template(templateData));
+			ViewUtils.verticalCenter();
 			
 			this.checkEvents();
 		};
@@ -30,20 +32,19 @@ function($, _, Utils, MessageUtils, page, Model) {
 				that.parent.show();
 			});
 			$("#inscription").click(function() {
-				MessageUtils.hideError();
+				MessageUtils.hide();
 				
 				var errorMessage = that.model.validate();
 				if (errorMessage) {
-					MessageUtils.showError(errorMessage);
+					MessageUtils.show(errorMessage, "danger");
 					return;
 				}
 				
 				that.model.send(function(data) {
-					console.log(data);
 					if (data.codeRetour != 0) {
-						MessageUtils.showError(data.message);
+						MessageUtils.show(data.message, "danger");
 					}else {
-						console.log("success");
+						that.parent.show(data.message);
 					}
 				});
 			});
