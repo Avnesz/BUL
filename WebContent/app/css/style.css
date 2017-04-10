@@ -20,7 +20,7 @@ html, body {
 * Menu
 **/
 .menu-page {
-	background-image: url("../img/menu-fond.jpg");
+/* 	background-image: url("../img/menu-fond.jpg"); */
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -28,7 +28,7 @@ html, body {
 	width: 75%;
 	height: 80%;
 	
-	background-image: url("../img/bulle.png");
+/* 	background-image: url("../img/bulle.png"); */
 	background-repeat: no-repeat;
 	background-size: auto 100%;
 	background-position: 50%;
