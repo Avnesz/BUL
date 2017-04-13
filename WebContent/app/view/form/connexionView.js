@@ -35,7 +35,7 @@ function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView) {
 					if (data.codeRetour != 0) {
 						MessageUtils.show(data.message, "danger");
 					}else {
-						console.log("success");
+						MessageUtils.show("Connexion reussie", "success");
 					}
 				});
 			});
