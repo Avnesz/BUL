@@ -15,6 +15,11 @@ function(Utils) {
 		this.validate = function() {
 			var mdp = $("#mdp").val();
 			
+			// Est remplie
+			if (!mdp) {
+				return "Veuillez remplir le champ mot de passe.";
+			}
+			
 			// Contient une majuscule
 			if (!/^(?=.*[A-Z]).*$/.test(mdp)) {
 				return "Votre mot de passe doit contenir au moins une majuscule.";
