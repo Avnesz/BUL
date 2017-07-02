@@ -15,13 +15,16 @@
 }
 .interface-outils ul {
 	position: relative;
-	top: 21%;
+	top: 30%;
 	width: 100%;
-	height: 100%;
+	height: 70%;
+}
+.interface-outils ul .outil:first-of-type {
+	margin-left: 10%;
 }
 .interface-outils ul .outil {
-	width: 9%;
-	height: 80%;
+	width: 8%;
+	height: 100%;
 	
 	background-image: url("../img/interface/tool.png");
 	background-repeat: no-repeat;
