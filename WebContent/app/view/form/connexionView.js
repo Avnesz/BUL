@@ -6,8 +6,9 @@ define(["jquery",
         "app/utils/messageUtils",
         "text!app/template/form/connexion.html",
         "app/model/form/connexionModel",
-        "app/view/form/inscriptionView"], 
-function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView) {
+        "app/view/form/inscriptionView",
+        "app/view/game/gameView"], 
+function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView, Game) {
 	'use strict';
 
 	return function(parent) {
@@ -35,7 +36,7 @@ function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView) {
 					if (data.codeRetour != 0) {
 						MessageUtils.show(data.message, "danger");
 					}else {
-						MessageUtils.show("Connexion reussie", "success");
+						that.game = new Game();
 					}
 				});
 			});

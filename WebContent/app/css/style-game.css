@@ -1,0 +1,24 @@
+/**
+* Game
+**/
+.dialogue {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+}
+.dialogue.mayo {
+	background-image: url("../img/dialogue/dialogue-mayo.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+/**
+* Items
+**/
+.piece {
+	background-image: url("../img/item/piece.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}

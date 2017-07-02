@@ -5,6 +5,15 @@ html, body {
 	height: 100vh;
 	overflow: hidden;
 }
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: inline-block;
+}
+ul li {
+	display: inline-block;
+}
 .page {
 	position: absolute;
 	width: 100vw;
@@ -15,37 +24,6 @@ html, body {
 	width: 100vw;
 	bottom: 0;
 }
-
-/**
-* Menu
-**/
-.menu-page {
-	background-image: url("../img/menu-fond.jpg");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-}
-.menu-cadre {
-	width: 75%;
-	height: 80%;
-	
-	background-image: url("../img/bulle.png");
-	background-repeat: no-repeat;
-	background-size: auto 100%;
-	background-position: 50%;
-}
-.menu-content {
-	width: 40%;
-}
-.menu-item {
-	margin-bottom: 5%;
-}
-.menu-button {
-	width: 48%;
-}
-
-/**
-* Utils
-**/
 .h-center {
 	position: absolute;
 	margin-left: auto;
@@ -57,26 +35,6 @@ html, body {
 	margin-top: 50vh;
     transform: translateY(-50%);
 }
-
-/**
-* Admin
-**/
-.adminPage li {
-    list-style: none;
-}
-.adminPage li:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    color: blue;
-}
-.adminPage table {
-    border-collapse: collapse;
-}
-.adminPage th {
-    background-color: blue;
-    color: white;
-}
-.adminPage table,th,td {
-    border: 1px solid black;
-    text-align: center;
+.clickable {
+	cursor: pointer;
 }

@@ -2,7 +2,7 @@
 define(["jquery",
         'underscore',
         "app/utils/utils",
-        "text!app/template/main.html",
+        "text!app/template/form/menu.html",
         "app/view/form/connexionView"], 
 function($, _, Utils, page, ConnexionView) {
 	'use strict';
@@ -12,9 +12,6 @@ function($, _, Utils, page, ConnexionView) {
 			this.el = $("#app");
 			Utils.load("track", {"where" : "Menu"}, function(data) {}, "POST");
 			this.render();
-			
-			this.connexionView = new ConnexionView();
-			this.connexionView.show();
 		};
 
 		this.render = function() {
@@ -22,6 +19,9 @@ function($, _, Utils, page, ConnexionView) {
 			var template = _.template(page);
 			var templateData = {};
 			this.el.html(template(templateData));
+			
+			this.connexionView = new ConnexionView();
+			this.connexionView.show();
 		};
 		
 		this.init();

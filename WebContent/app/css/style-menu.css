@@ -1,0 +1,26 @@
+/**
+* Menu
+**/
+.menu-page {
+	background-image: url("../img/menu/menu-fond.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.menu-cadre {
+	width: 75%;
+	height: 80%;
+	
+	background-image: url("../img/menu/bulle.png");
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	background-position: 50%;
+}
+.menu-content {
+	width: 40%;
+}
+.menu-item {
+	margin-bottom: 5%;
+}
+.menu-button {
+	width: 48%;
+}
