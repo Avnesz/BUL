@@ -20,7 +20,7 @@
 	height: 70%;
 }
 .interface-outils ul .outil:first-of-type {
-	margin-left: 10%;
+	margin-left: 15%;
 }
 .interface-outils ul .outil {
 	width: 8%;
@@ -29,6 +29,12 @@
 	background-image: url("../img/interface/tool.png");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+}
+.interface-outils ul .outil:hover {
+    background-image: url("../img/interface/tool-hover.png");
+}
+.interface-outils ul .outil:last-of-type {
+    border-left: 3px solid #6d3d13;
 }
 
 /**
@@ -48,7 +54,7 @@
 .interface-argent .montant {
 	position: relative;
 	display: inline-block;
-	top: 25%;
+	top: 18%;
 	cursor: default;
 	
 	font-size: 1.5em;
@@ -102,4 +108,51 @@
 }
 .interface-menu:hover {
 	transform: scale(1.1);
+}
+
+/**
+* Quetes
+**/
+.interface-quete {
+    position: absolute;
+    width: 3vw;
+    height: 70vh;
+    right: 0;
+    top: 10vh;
+}
+.interface-quete ul {
+	margin-top: 10%;
+    width: 100%;
+    height: 100%;
+}
+.interface-quete ul .quete {
+    width: 100%;
+    height: 8%;
+    
+    background-image: url("../img/interface/quest.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.interface-quete ul .quete:hover {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
