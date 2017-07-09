@@ -33,9 +33,6 @@
 .interface-outils ul .outil:hover {
     background-image: url("../img/interface/tool-hover.png");
 }
-.interface-outils ul .outil:last-of-type {
-    border-left: 3px solid #6d3d13;
-}
 
 /**
 * Argent
