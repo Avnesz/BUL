@@ -1,0 +1,21 @@
+/**
+* Tiles
+**/
+.tileLine {
+	display: block;
+}
+.tile {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+}
+.herbe {
+	background-image: url("../img/tiles/herbe.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.eau {
+	background-image: url("../img/tiles/eau.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}

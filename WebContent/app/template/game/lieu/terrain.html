@@ -1,0 +1,17 @@
+<div id="couches" class="page">
+    <div id="couche1" class="page">
+		<% 
+		    for (var i in data.couche1) {
+		    var line = data.couche1[i];
+		%>
+		    <div class="tileLine">
+		        <% 
+		            for (var j in line) {
+		            var tuile = line[j];
+		        %>
+		           <div class="tile <%=tuile%>"></div>
+		        <% } %>
+		    </div>
+		<% } %>
+	</div>
+</div>

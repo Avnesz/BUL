@@ -4,8 +4,9 @@ define(["jquery",
         "app/utils/utils",
         "text!app/template/game/game.html",
         "app/view/game/didactitiel/initView",
-        "app/view/game/interface/interfaceView"],
-function($, _, Utils, page, Didactitiel, Interface) {
+        "app/view/game/interface/interfaceView",
+        "app/view/game/lieu/mapView"],
+function($, _, Utils, page, Didactitiel, Interface, MapView) {
 	'use strict';
 
 	return function() {
@@ -21,7 +22,7 @@ function($, _, Utils, page, Didactitiel, Interface) {
 			var templateData = {};
 			this.el.html(template(templateData));
 			
-			//this.lieu = new Terrain(this);
+			this.map = new MapView(this);
 			
 			this.interface = new Interface(this);
 			
