@@ -13,6 +13,8 @@ import utils.SessionUtils;
 import ws.bebel.BebelWS;
 import ws.bebel.connexion.ConnexionWSRequest;
 import ws.bebel.connexion.ConnexionWSResponse;
+import bdd.PlayerDAO;
+import bean.Player;
 
 /**
  * Controller permettant de se connecter
@@ -35,9 +37,10 @@ public class ConnexionServlet extends AbstractServlet<ConnexionServletRequest, C
 	protected ConnexionServletResponse doPost(final ConnexionServletRequest request) throws ServletException,
 			IOException {
 		final ConnexionServletResponse response = new ConnexionServletResponse();
+        final String login = request.getLogin();
 
 		final ConnexionWSRequest wsRequest = new ConnexionWSRequest();
-		wsRequest.setLogin(request.getLogin());
+        wsRequest.setLogin(login);
 		wsRequest.setMdp(request.getMdp());
 
 		ConnexionWSResponse wsResponse;
@@ -47,7 +50,16 @@ public class ConnexionServlet extends AbstractServlet<ConnexionServletRequest, C
 			if (wsResponse.getCodeRetour() == 0) {
 				final String token = wsResponse.getToken();
 				response.setToken(token);
-				SessionUtils.getInstance(httpRequest).connectUser(token);
+
+                final PlayerDAO playerDAO = PlayerDAO.getInstance();
+
+                Player player = playerDAO.getPlayer(login);
+                if (player == null) {
+                    player = Player.newUser(login);
+                    playerDAO.saveUser(player);
+                }
+
+                SessionUtils.getInstance(httpRequest).connectUser(token, player);
 			} else {
 				throw new GeneralException(wsResponse.getCodeRetour(), wsResponse.getMessage());
 			}

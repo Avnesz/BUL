@@ -27,7 +27,7 @@ public class CheckConnect extends AbstractFilter<ConnectFilterRequest> {
             throws ServletException, IOException {
         final GeneralResponse response = new GeneralResponse();
 
-        final String sessionToken = SessionUtils.getInstance(httpRequest).getUser();
+        final String sessionToken = SessionUtils.getInstance(httpRequest).getToken();
         final String requestToken = request.getToken();
 
         if (sessionToken == null || !sessionToken.equals(requestToken)) {

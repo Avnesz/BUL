@@ -28,7 +28,7 @@ function($, _, Utils, page) {
 		this.load = function() {
 		    this.tileMap = [
                 ["eau", "eau", "eau"],
-                ["eau", "herbe", "eau"],
+                ["eau", "", "eau"],
                 ["eau", "eau", "eau"]
             ];
 		    
