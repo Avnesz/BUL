@@ -19,3 +19,13 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
+.trou {
+	background-image: url("../img/tiles/trou.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.fleur {
+	background-image: url("../img/tiles/fleur.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}

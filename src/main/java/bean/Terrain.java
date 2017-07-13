@@ -1,44 +1,54 @@
 package bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Terrain {
-    private List<List<String>> couche1 = new ArrayList<List<String>>();
+    private List<List<String>> sousSol;
+    private List<List<String>> sol;
+    private List<List<String>> layer1;
 
-    public static Terrain newTerrain() {
-        final Terrain terrain = new Terrain();
-        
-        final List<List<String>> couche1 = terrain.getCouche1();
-        
-        for (int i=0; i<10; i++) {
-            final List<String> line = new ArrayList<String>();
-            for (int j=0; j<10; j++) {
-                if (i==5 && j == 5) {
-                    line.add("");
-                }else {
-                    line.add("eau");
-                }
-            }
-            couche1.add(line);
-        }
-        
-        return terrain;
+    /**
+     * @return the sousSol
+     */
+    public List<List<String>> getSousSol() {
+        return sousSol;
     }
 
     /**
-     * @return the couche1
+     * @param sousSol
+     *            the sousSol to set
      */
-    public List<List<String>> getCouche1() {
-        return couche1;
+    public void setSousSol(final List<List<String>> sousSol) {
+        this.sousSol = sousSol;
     }
 
     /**
-     * @param couche1
-     *            the couche1 to set
+     * @return the sol
      */
-    public void setCouche1(final List<List<String>> couche1) {
-        this.couche1 = couche1;
+    public List<List<String>> getSol() {
+        return sol;
     }
 
+    /**
+     * @param sol
+     *            the sol to set
+     */
+    public void setSol(final List<List<String>> sol) {
+        this.sol = sol;
+    }
+
+    /**
+     * @return the layer1
+     */
+    public List<List<String>> getLayer1() {
+        return layer1;
+    }
+
+    /**
+     * @param layer1
+     *            the layer1 to set
+     */
+    public void setLayer1(final List<List<String>> layer1) {
+        this.layer1 = layer1;
+    }
 }

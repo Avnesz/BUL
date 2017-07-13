@@ -14,6 +14,16 @@
         <servlet-name>ConnexionServlet</servlet-name>
         <url-pattern>/connexion</url-pattern>
     </servlet-mapping>
+
+  	<!-- GetTerrain -->
+    <servlet>
+        <servlet-name>GetTerrainServlet</servlet-name>
+        <servlet-class>servlet.getTerrain.GetTerrainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetTerrainServlet</servlet-name>
+        <url-pattern>/getTerrain</url-pattern>
+    </servlet-mapping>
     
     <!-- Filtres -->
     <!-- Verifie qu'un utilisateur est bien connecte -->

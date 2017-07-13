@@ -1,8 +1,9 @@
 <div id="couches" class="page">
-    <div id="couche1" class="page">
+    <div id="sousSol" class="page">
 		<% 
-		    for (var i in data.couche1) {
-		    var line = data.couche1[i];
+		    var sousSol = data.terrain.sousSol;
+		    for (var i in sousSol) {
+		    var line = sousSol[i];
 		%>
 		    <div class="tileLine">
 		        <% 

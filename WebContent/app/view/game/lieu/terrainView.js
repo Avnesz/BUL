@@ -1,9 +1,8 @@
 /*global define */
 define(["jquery",
         'underscore',
-        "app/utils/utils",
-        "text!app/template/game/lieu/terrain.html"],
-function($, _, Utils, page) {
+        "app/utils/utils"],
+function($, _, Utils) {
 	'use strict';
 
 	return function(parent) {
@@ -11,29 +10,47 @@ function($, _, Utils, page) {
 			this.parent = parent;
 			this.el = "#terrain";
 		};
-
-		this.render = function() {
-			_.templateSettings.variable = "data";
-			var template = _.template(page);
-			var templateData = {
-			        couche1 : this.tileMap
-			};
-			
-			var content = template(templateData).replace(/>\s*</g, '><');
-			
-			console.log(content);
-			$(this.el).html(content);
-		};
 		
 		this.load = function() {
-		    this.tileMap = [
-                ["eau", "eau", "eau"],
-                ["eau", "", "eau"],
-                ["eau", "eau", "eau"]
-            ];
-		    
-		    this.render();
+		    var that = this;
+		    Utils.load("getTerrain", null, function(data) {
+		        if (data.codeRetour == 0) {
+		            that.terrain = data.terrain;
+		            that.render();
+		        }
+		    }, "POST");
 		};
+		
+		this.render = function() {
+            this.renderLayer("sousSol", this.terrain.sousSol);
+            this.renderLayer(this.terrain.sol);
+            this.renderLayer(this.terrain.layer1);
+        };
+
+        this.renderLayer = function(id, layer) {
+            var container = $("<div></div>");
+            container.addClass("page");
+            container.attr("id", id);
+            
+            for (var i in layer) {
+                var line = layer[i];
+                
+                var tileLine = $("<div></div>");
+                tileLine.addClass("tileLine");
+                for (var j in line) {
+                    var tuile = line[j];
+                    
+                    var tile = $("<div></div>");
+                    tile.addClass("tile");
+                    tile.addClass(tuile);
+                    
+                    tileLine.append(tile);
+                }
+                container.append(tileLine);
+            }
+            
+            $(this.el).append(container);
+        };
 		
 		this.init(parent);
 	};
