@@ -23,7 +23,10 @@ function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView, Gam
 			var template = _.template(page);
 			var templateData = {};
 			this.el.html(template(templateData));
-			ViewUtils.verticalCenter();
+			
+			$(document).ready(function() {
+				ViewUtils.verticalCenter();
+			});
 			
 			this.checkEvents();
 		};

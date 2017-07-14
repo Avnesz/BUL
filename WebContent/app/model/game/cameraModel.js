@@ -28,8 +28,8 @@ function($) {
             });
         };
 		this.zoomCorrect = function() {
-		    if (this.data.zoom > 2) this.data.zoom = 2;
-            if (this.data.zoom < 0.125) this.data.zoom = 0.125;
+		    if (this.data.zoom > 1.5) this.data.zoom = 1.5;
+            if (this.data.zoom < 0.75) this.data.zoom = 0.75;
 		};
 	};
 });

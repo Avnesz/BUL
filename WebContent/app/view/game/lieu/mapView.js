@@ -31,7 +31,7 @@ function($, _, Utils, page, MouseModel, CameraModel, Terrain) {
 			var content = template(templateData).replace(/>\s*</g, '><');
 			this.el.html(content);
 			
-			this.terrain.load()
+			this.terrain.load();
 			
 			this.makeEvents();
 			this.loopEvents();
@@ -41,7 +41,7 @@ function($, _, Utils, page, MouseModel, CameraModel, Terrain) {
 		    var that = this;
 		    
 		    this.el.mousewheel(function(event){
-		        that.camera.zoom(event.deltaY*0.125);
+		        that.camera.zoom(event.deltaY*0.25);
 		    });
 		};
 		
@@ -51,7 +51,7 @@ function($, _, Utils, page, MouseModel, CameraModel, Terrain) {
 		    
 		    setTimeout(function() {
 		        that.loopEvents();
-		    }, 45)
+		    }, 45);
 		};
 		
 		this.init(parent);

@@ -29,3 +29,28 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
+.buisson-vert {
+	background-image: url("../img/tiles/buisson-vert.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.buisson-bleu {
+	background-image: url("../img/tiles/buisson-bleu.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.buisson-jaune {
+	background-image: url("../img/tiles/buisson-jaune.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.buisson-orange {
+	background-image: url("../img/tiles/buisson-orange.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.buisson-rouge {
+	background-image: url("../img/tiles/buisson-rouge.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
