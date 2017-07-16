@@ -14,7 +14,7 @@ import bean.Player;
 import bean.Terrain;
 
 /**
- * Controller permettant de se connecter
+ * Controller permettant de recuperer un terrain
  * 
  * @author Mayitabel
  * 
@@ -24,32 +24,30 @@ public class GetTerrainServlet extends AbstractServlet<String, GetTerrainServlet
 	private final Logger logger = new Logger(GetTerrainServlet.class.getName());
 
 	@Override
-    protected GetTerrainServletResponse doGet(final String request) throws ServletException,
-			IOException {
+	protected GetTerrainServletResponse doGet(final String request) throws ServletException, IOException {
 		return null;
 	}
 
 	@Override
-    protected GetTerrainServletResponse doPost(final String request) throws ServletException,
-			IOException {
+	protected GetTerrainServletResponse doPost(final String request) throws ServletException, IOException {
 		final GetTerrainServletResponse response = new GetTerrainServletResponse();
-		
+
 		try {
-		    final Player player = SessionUtils.getInstance(httpRequest).getPlayer();
-            final Terrain terrain = TerrainDAO.getInstance().getTerrain(player.getLogin());
-            response.setTerrain(terrain);
-        } catch (final GeneralException e) {
-            response.setCodeRetour(-1);
-            response.setMessage("Impossible de recuperer le terrain");
-            logger.log(Level.WARNING, "Impossible de recuperer le terrain : " + e.getMessage());
-        }
+			final Player player = SessionUtils.getInstance(httpRequest).getPlayer();
+			final Terrain terrain = TerrainDAO.getInstance().getTerrain(player.getLogin());
+			response.setTerrain(terrain);
+		} catch (final GeneralException e) {
+			response.setCodeRetour(-1);
+			response.setMessage("Impossible de recuperer le terrain");
+			logger.log(Level.WARNING, "Impossible de recuperer le terrain : " + e.getMessage());
+		}
 
 		return response;
 	}
 
 	@Override
-    protected String getRequest(final String data) {
-        return null;
+	protected String getRequest(final String data) {
+		return null;
 	}
 
 }

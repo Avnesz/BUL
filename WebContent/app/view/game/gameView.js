@@ -5,14 +5,16 @@ define(["jquery",
         "text!app/template/game/game.html",
         "app/view/game/didactitiel/initView",
         "app/view/game/interface/interfaceView",
-        "app/view/game/lieu/mapView"],
-function($, _, Utils, page, Didactitiel, Interface, MapView) {
+        "app/view/game/lieu/mapView",
+        "app/model/game/playerModel"],
+function($, _, Utils, page, Didactitiel, Interface, MapView, PlayerModel) {
 	'use strict';
 
 	return function() {
 		this.init = function() {
 			this.el = $("#app");
 			Utils.load("track", {"where" : "Lancement du jeu"}, function(data) {}, "POST");
+			this.player = new PlayerModel();
 			this.render();
 		};
 

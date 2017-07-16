@@ -33,6 +33,9 @@
 .interface-outils ul .outil:hover {
     background-image: url("../img/interface/tool-hover.png");
 }
+.interface-outils ul .outil.choose {
+    background-image: url("../img/interface/tool-hover.png");
+}
 
 /**
 * Argent

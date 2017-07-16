@@ -8,6 +8,7 @@ function($, _, Utils) {
 	return function(parent) {
 		this.init = function(parent) {
 			this.parent = parent;
+			this.player = parent.player;
 			this.el = "#terrain";
 		};
 		
@@ -15,16 +16,18 @@ function($, _, Utils) {
 		    var that = this;
 		    Utils.load("getTerrain", null, function(data) {
 		        if (data.codeRetour == 0) {
-		            that.terrain = data.terrain;
+		            that.player.terrain = data.terrain;
 		            that.render();
 		        }
 		    }, "POST");
 		};
 		
 		this.render = function() {
-            this.renderLayer("sousSol", this.terrain.sousSol);
-            this.renderLayer("sol", this.terrain.sol);
-            this.renderLayer("layer1", this.terrain.layer1);       
+			$(this.el).empty();
+			
+			this.renderLayer("sousSol", this.player.terrain.sousSol);
+            this.renderLayer("sol", this.player.terrain.sol);
+            this.renderLayer("layer1", this.player.terrain.layer1);       
             
             this.makeEvents();
         };
@@ -56,14 +59,30 @@ function($, _, Utils) {
             $(this.el).append(container);
         };
         
+        /**
+         * Rafraichit certaines partis du terrain qui ont été modifiées
+         */
+        this.refresh = function(terrain) {
+			this.refreshLayer("sousSol", terrain.sousSol);
+            this.refreshLayer("sol", terrain.sol);
+            this.refreshLayer("layer1", terrain.layer1);       
+        };
+        this.refreshLayer = function(id, layer) {
+            for (var y in layer) {
+                var line = layer[y];
+                for (var x in line) {
+                    var tuile = line[x];
+                    $("#"+id).find(".tile[x="+x+"][y="+y+"]").attr("class", "tile "+tuile);
+                }
+            }
+        };
+        
         this.makeEvents = function() {
         	var that = this;
         	$(".tile").click(function() {
         		var x = $(this).attr("x");
         		var y = $(this).attr("y");
-        		that.terrain.sol[y][x] = "trou";
-        		console.log("#sol .tile[x="+x+"][y="+y+"]");
-        		$("#sol .tile[x="+x+"][y="+y+"]").attr("class", "tile trou");
+        		that.player.useCurrentTool(x, y);
         	});
         };
 		

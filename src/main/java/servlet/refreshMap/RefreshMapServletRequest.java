@@ -1,15 +1,14 @@
-package servlet.getTerrain;
+package servlet.refreshMap;
 
-import servlet.abstrait.GeneralResponse;
 import bean.Terrain;
 
 /**
- * reponse de recuperation du terrain
+ * Requete de raffraichissement de la map
  * 
  * @author Mayitabel
  * 
  */
-public class GetTerrainServletResponse extends GeneralResponse {
+public class RefreshMapServletRequest {
 	private Terrain terrain;
 
 	/**

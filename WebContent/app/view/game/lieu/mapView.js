@@ -6,19 +6,22 @@ define(["jquery",
         "app/model/game/mouseModel",
         "app/model/game/cameraModel",
         "app/view/game/lieu/terrainView",
+        "app/modl/game/refreshMapModel",
         "jquery-mousewheel"],
-function($, _, Utils, page, MouseModel, CameraModel, Terrain) {
+function($, _, Utils, page, MouseModel, CameraModel, RefreshMapModel, Terrain) {
 	'use strict';
 
 	return function(parent) {
 		this.init = function(parent) {
 			this.parent = parent;
+			this.player = parent.player;
 			this.el = $("#map");
 			
 			this.camera = new CameraModel();
 			this.mouse = new MouseModel();
 			
 			this.terrain = new Terrain(this);
+			this.refreshMapModel = new RefreshMapModel();
 			
 			this.render();
 		};
@@ -48,6 +51,11 @@ function($, _, Utils, page, MouseModel, CameraModel, Terrain) {
 		this.loopEvents = function() {
 		    var that = this;
 
+		    this.refreshMapModel.data.terrain = this.player.terrain;
+		    Utils.load("refreshMap", that.refreshMapModel.data, function(data) {
+    			that.player.refresh(data);
+    			that.terrain.render();
+    		});
 		    
 		    setTimeout(function() {
 		        that.loopEvents();
