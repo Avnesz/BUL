@@ -1,30 +1,27 @@
 /*global define */
-define(["jquery", "app/utils/mapEntry"], 
-function($, MapEntry) {
+define(["jquery", "app/model/game/inventoryEntry", "app/data/items"], 
+function($, InventoryEntry, ItemsData) {
 	'use strict';
 
 	return function() {
 	    this.map = [];
 	    
-	    this.get = function(name) {
-	    	for (var i = 0; i < this.inventory.length; i++) {
-	    		var itemFound = this.inventory[i];
-	    		if (itemFound.key == itemSearched) return {index: i, item: itemFound.value};
-	    	}
-	    	return null;
+	    this.get = function(itemId) {
+	    	return this.map[itemId];
 	    };
 	    
 	    /**
 	     * Si l'objet existe dans linventaire, en rajoute un
 	     * Sinon, l'ajoute dans l'inventaire.
 	     */
-	    this.put = function(item) {
+	    this.put = function(itemId) {
+	        var item = ItemsData.get(itemId);
 	    	if (item) {
-		    	var itemFound = this.get(item).item;
+		    	var itemFound = this.map[item.name];
 		    	if (itemFound) {
 		    		itemFound.add(1);
 		    	}else {
-		    		this.map.push(new MapEntry(item.name, item));
+		    	    this.map[itemId] = new InventoryEntry(item);
 		    	}
 	    	}
 	    };
@@ -33,12 +30,12 @@ function($, MapEntry) {
 	     * Retire un exemplaire de l'objet de l'inventaire
 	     * Si il n'y en a plus, le supprime de l'inventaire.
 	     */
-	    this.remove = function(itemName) {
-    		var entry = this.get(itemName);
-    		if (entry.item) {
-    			entry.item.remove(1);
-    			if (entry.item.nbr <= 0) {
-        			this.map.splice(entry.id, 1);
+	    this.remove = function(itemId) {
+    		var entry = this.map[itemId];
+    		if (entry) {
+    			entry.remove(1);
+    			if (entry.nbr <= 0) {
+        			this.map.splice(this.map.indexOf(itemId), 1);
         		}
     		}
 	    };

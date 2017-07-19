@@ -9,6 +9,7 @@ function($, _, Utils) {
 		this.init = function(parent) {
 			this.parent = parent;
 			this.player = parent.player;
+			this.terrain = this.player.terrain;
 			this.el = "#terrain";
 		};
 		
@@ -16,7 +17,7 @@ function($, _, Utils) {
 		    var that = this;
 		    Utils.load("getTerrain", null, function(data) {
 		        if (data.codeRetour == 0) {
-		            that.player.terrain = data.terrain;
+		            that.terrain.create(data.terrain);
 		            that.render();
 		        }
 		    }, "POST");
@@ -25,9 +26,9 @@ function($, _, Utils) {
 		this.render = function() {
 			$(this.el).empty();
 			
-			this.renderLayer("sousSol", this.player.terrain.sousSol);
-            this.renderLayer("sol", this.player.terrain.sol);
-            this.renderLayer("layer1", this.player.terrain.layer1);       
+			this.renderLayer("sousSol", this.terrain.get("sousSol"));
+            this.renderLayer("sol", this.terrain.get("sol"));
+            this.renderLayer("layer1", this.terrain.get("layer1"));
             
             this.makeEvents();
         };
@@ -47,7 +48,7 @@ function($, _, Utils) {
                     
                     var tile = $("<div></div>");
                     tile.addClass("tile");
-                    tile.addClass(tuile);
+                    tile.addClass(tuile.id);
                     tile.attr("x", x);
                     tile.attr("y", y);
                     
@@ -59,20 +60,24 @@ function($, _, Utils) {
             $(this.el).append(container);
         };
         
-        /**
-         * Rafraichit certaines partis du terrain qui ont été modifiées
-         */
-        this.refresh = function(terrain) {
-			this.refreshLayer("sousSol", terrain.sousSol);
-            this.refreshLayer("sol", terrain.sol);
-            this.refreshLayer("layer1", terrain.layer1);       
+        this.refresh = function(newTerrain) {
+            if (newTerrain) {
+                this.refreshLayer(this.terrain.get("sousSol"), newTerrain.sousSol);
+                this.refreshLayer(this.terrain.get("sol"), newTerrain.sol);
+                this.refreshLayer(this.terrain.get("layer1"), newTerrain.layer1);
+            }
         };
-        this.refreshLayer = function(id, layer) {
-            for (var y in layer) {
-                var line = layer[y];
-                for (var x in line) {
-                    var tuile = line[x];
-                    $("#"+id).find(".tile[x="+x+"][y="+y+"]").attr("class", "tile "+tuile);
+        
+        this.refreshLayer = function(layer, newLayer) {
+            if (newLayer) {
+                for (var y in newLayer) {
+                    var newLine = newLayer[y];
+                    for (var x in newLine) {
+                        console.log("update : ", x, y);
+                        console.log(newTuile);
+                        var newTuile = newLine[x];
+                        layer[y][x] = newTuile;
+                    }
                 }
             }
         };

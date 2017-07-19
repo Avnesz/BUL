@@ -8,7 +8,7 @@ import servlet.abstrait.GeneralResponse;
  * @author Mayitabel
  * 
  */
-public class ConnexionServletResponse extends GeneralResponse {
+public class ConnexionResponse extends GeneralResponse {
     private String token;
 
     /**

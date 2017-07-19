@@ -1,99 +1,84 @@
 package bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import dto.TerrainDTO;
-import enums.Tuile;
+import java.util.Map;
 
 public class Terrain {
-	private List<List<Tuile>> sousSol = new ArrayList<>();
-	private List<List<Tuile>> sol = new ArrayList<>();
-	private List<List<Tuile>> layer1 = new ArrayList<>();
+    private long version;
+    private String proprietaire;
+    private Map<Integer, Map<Integer, Tuile>> sousSol;
+    private Map<Integer, Map<Integer, Tuile>> sol;
+    private Map<Integer, Map<Integer, Tuile>> layer1;
 
 	/**
-	 * Creer un terrain à partir d'un DTO
-	 * 
-	 * @param dto
-	 */
-	public Terrain(final TerrainDTO dto) {
-		createLayer(dto.getSousSol(), sousSol);
-		createLayer(dto.getSol(), sol);
-		createLayer(dto.getLayer1(), layer1);
-	}
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
 
-	/**
-	 * Creer les differentes couches du terrain
-	 * 
-	 * @param layerDto
-	 * @param layerBean
-	 */
-	private void createLayer(final List<List<String>> layerDto, final List<List<Tuile>> layerBean) {
-		for (final List<String> lineDto : layerDto) {
-			final List<Tuile> lineBean = new ArrayList<>();
-			for (final String tuileDto : lineDto) {
-				lineBean.add(Tuile.getById(tuileDto));
-			}
-		}
-	}
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
-	/**
-	 * Raffraichie le terrain avec les nouvelles données
-	 * 
-	 * @param newTerrain
-	 */
-	public void refresh(final Terrain newTerrain) {
-		refreshLayer(newTerrain.getSousSol(), sousSol);
-		refreshLayer(newTerrain.getSol(), sol);
-		refreshLayer(newTerrain.getLayer1(), layer1);
-	}
+    /**
+     * @return the proprietaire
+     */
+    public String getProprietaire() {
+        return proprietaire;
+    }
 
-	private void refreshLayer(final List<List<Tuile>> newLayer, final List<List<Tuile>> layer) {
+    /**
+     * @param proprietaire the proprietaire to set
+     */
+    public void setProprietaire(final String proprietaire) {
+        this.proprietaire = proprietaire;
+    }
 
-	}
+    /**
+     * @return the sousSol
+     */
+    public Map<Integer, Map<Integer, Tuile>> getSousSol() {
+        return sousSol;
+    }
 
-	/**
-	 * @return the sousSol
-	 */
-	public List<List<Tuile>> getSousSol() {
-		return sousSol;
-	}
+    /**
+     * @param sousSol
+     *            the sousSol to set
+     */
+    public void setSousSol(final Map<Integer, Map<Integer, Tuile>> sousSol) {
+        this.sousSol = sousSol;
+    }
 
-	/**
-	 * @param sousSol
-	 *            the sousSol to set
-	 */
-	public void setSousSol(final List<List<Tuile>> sousSol) {
-		this.sousSol = sousSol;
-	}
+    /**
+     * @return the sol
+     */
+    public Map<Integer, Map<Integer, Tuile>> getSol() {
+        return sol;
+    }
 
-	/**
-	 * @return the sol
-	 */
-	public List<List<Tuile>> getSol() {
-		return sol;
-	}
+    /**
+     * @param sol
+     *            the sol to set
+     */
+    public void setSol(final Map<Integer, Map<Integer, Tuile>> sol) {
+        this.sol = sol;
+    }
 
-	/**
-	 * @param sol
-	 *            the sol to set
-	 */
-	public void setSol(final List<List<Tuile>> sol) {
-		this.sol = sol;
-	}
+    /**
+     * @return the layer1
+     */
+    public Map<Integer, Map<Integer, Tuile>> getLayer1() {
+        return layer1;
+    }
 
-	/**
-	 * @return the layer1
-	 */
-	public List<List<Tuile>> getLayer1() {
-		return layer1;
-	}
-
-	/**
-	 * @param layer1
-	 *            the layer1 to set
-	 */
-	public void setLayer1(final List<List<Tuile>> layer1) {
-		this.layer1 = layer1;
-	}
+    /**
+     * @param layer1
+     *            the layer1 to set
+     */
+    public void setLayer1(final Map<Integer, Map<Integer, Tuile>> layer1) {
+        this.layer1 = layer1;
+    }
 }

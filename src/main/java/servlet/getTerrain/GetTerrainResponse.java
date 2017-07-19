@@ -9,7 +9,7 @@ import bean.Terrain;
  * @author Mayitabel
  * 
  */
-public class GetTerrainServletResponse extends GeneralResponse {
+public class GetTerrainResponse extends GeneralResponse {
 	private Terrain terrain;
 
 	/**

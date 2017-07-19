@@ -1,27 +1,29 @@
 /*global define */
 define(["jquery",
         'underscore',
-        "app/utils/utils",
         "text!app/template/game/lieu/map.html",
         "app/model/game/mouseModel",
         "app/model/game/cameraModel",
         "app/view/game/lieu/terrainView",
-        "app/modl/game/refreshMapModel",
+        "app/model/game/refreshMapModel",
         "jquery-mousewheel"],
-function($, _, Utils, page, MouseModel, CameraModel, RefreshMapModel, Terrain) {
+function($, _, page, MouseModel, CameraModel, Terrain, RefreshMapModel) {
 	'use strict';
 
 	return function(parent) {
 		this.init = function(parent) {
 			this.parent = parent;
 			this.player = parent.player;
+			this.player.addToInventory("pelle");
+			this.player.pickItem("pelle");
+			
 			this.el = $("#map");
 			
 			this.camera = new CameraModel();
 			this.mouse = new MouseModel();
+			this.refreshMapModel = new RefreshMapModel();
 			
 			this.terrain = new Terrain(this);
-			this.refreshMapModel = new RefreshMapModel();
 			
 			this.render();
 		};
@@ -51,15 +53,13 @@ function($, _, Utils, page, MouseModel, CameraModel, RefreshMapModel, Terrain) {
 		this.loopEvents = function() {
 		    var that = this;
 
-		    this.refreshMapModel.data.terrain = this.player.terrain;
-		    Utils.load("refreshMap", that.refreshMapModel.data, function(data) {
-    			that.player.refresh(data);
-    			that.terrain.render();
-    		});
+		    this.refreshMapModel.send(null, this.player.terrain, function(data) {
+		        if (data.codeRetour == 0) that.terrain.refresh(data.newTerrain);
+		    });
 		    
 		    setTimeout(function() {
 		        that.loopEvents();
-		    }, 45);
+		    }, 3000);
 		};
 		
 		this.init(parent);

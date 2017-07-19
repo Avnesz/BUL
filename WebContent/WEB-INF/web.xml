@@ -24,7 +24,17 @@
         <servlet-name>GetTerrainServlet</servlet-name>
         <url-pattern>/getTerrain</url-pattern>
     </servlet-mapping>
-    
+
+  	<!-- refreshMap -->
+    <servlet>
+        <servlet-name>RefreshMapServlet</servlet-name>
+        <servlet-class>servlet.refreshMap.RefreshMapServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RefreshMapServlet</servlet-name>
+        <url-pattern>/refreshMap</url-pattern>
+    </servlet-mapping>
+
     <!-- Filtres -->
     <!-- Verifie qu'un utilisateur est bien connecte -->
     <filter>

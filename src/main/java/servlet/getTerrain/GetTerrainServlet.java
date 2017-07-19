@@ -5,6 +5,8 @@ import java.util.logging.Level;
 
 import javax.servlet.ServletException;
 
+import org.apache.commons.lang.StringUtils;
+
 import servlet.abstrait.AbstractServlet;
 import servlet.abstrait.GeneralException;
 import utils.Logger;
@@ -19,35 +21,39 @@ import bean.Terrain;
  * @author Mayitabel
  * 
  */
-public class GetTerrainServlet extends AbstractServlet<String, GetTerrainServletResponse> {
-	private static final long serialVersionUID = -4647019705021722992L;
-	private final Logger logger = new Logger(GetTerrainServlet.class.getName());
+public class GetTerrainServlet extends AbstractServlet<String, GetTerrainResponse> {
+    private static final long serialVersionUID = -4647019705021722992L;
+    private final Logger logger = new Logger(GetTerrainServlet.class.getName());
 
-	@Override
-	protected GetTerrainServletResponse doGet(final String request) throws ServletException, IOException {
-		return null;
-	}
+    @Override
+    protected GetTerrainResponse doGet(final String request) throws ServletException, IOException {
+        return null;
+    }
 
-	@Override
-	protected GetTerrainServletResponse doPost(final String request) throws ServletException, IOException {
-		final GetTerrainServletResponse response = new GetTerrainServletResponse();
+    @Override
+    protected GetTerrainResponse doPost(final String request) throws ServletException, IOException {
+        final GetTerrainResponse response = new GetTerrainResponse();
 
-		try {
-			final Player player = SessionUtils.getInstance(httpRequest).getPlayer();
-			final Terrain terrain = TerrainDAO.getInstance().getTerrain(player.getLogin());
-			response.setTerrain(terrain);
-		} catch (final GeneralException e) {
-			response.setCodeRetour(-1);
-			response.setMessage("Impossible de recuperer le terrain");
-			logger.log(Level.WARNING, "Impossible de recuperer le terrain : " + e.getMessage());
-		}
+        try {
+            String proprietaire = request;
+            if (StringUtils.isEmpty(proprietaire) || "null".equals(proprietaire)) {
+                final Player player = SessionUtils.getInstance(httpRequest).getPlayer();
+                proprietaire = player.getLogin();
+            }
+            final Terrain terrain = TerrainDAO.getInstance().getTerrain(proprietaire, true);
+            response.setTerrain(terrain);
+        } catch (final GeneralException e) {
+            response.setCodeRetour(-1);
+            response.setMessage("Impossible de recuperer le terrain");
+            logger.log(Level.WARNING, "Impossible de recuperer le terrain : " + e.getMessage());
+        }
 
-		return response;
-	}
+        return response;
+    }
 
-	@Override
-	protected String getRequest(final String data) {
-		return null;
-	}
+    @Override
+    protected String getRequest(final String data) {
+        return data;
+    }
 
 }

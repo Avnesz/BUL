@@ -6,7 +6,7 @@ package servlet.connexion;
  * @author Mayitabel
  * 
  */
-public class ConnexionServletRequest {
+public class ConnexionRequest {
     private String login;
     private String mdp;
 

@@ -22,21 +22,21 @@ import bean.Player;
  * @author Mayitabel
  * 
  */
-public class ConnexionServlet extends AbstractServlet<ConnexionServletRequest, ConnexionServletResponse> {
+public class ConnexionServlet extends AbstractServlet<ConnexionRequest, ConnexionResponse> {
 	private static final long serialVersionUID = -4647019705021722992L;
 	private final Logger logger = new Logger(ConnexionServlet.class.getName());
 	private final BebelWS bebelWs = new BebelWS();
 
 	@Override
-	protected ConnexionServletResponse doGet(final ConnexionServletRequest request) throws ServletException,
+	protected ConnexionResponse doGet(final ConnexionRequest request) throws ServletException,
 			IOException {
 		return null;
 	}
 
 	@Override
-	protected ConnexionServletResponse doPost(final ConnexionServletRequest request) throws ServletException,
+	protected ConnexionResponse doPost(final ConnexionRequest request) throws ServletException,
 			IOException {
-		final ConnexionServletResponse response = new ConnexionServletResponse();
+		final ConnexionResponse response = new ConnexionResponse();
         final String login = request.getLogin();
 
 		final ConnexionWSRequest wsRequest = new ConnexionWSRequest();
@@ -73,8 +73,8 @@ public class ConnexionServlet extends AbstractServlet<ConnexionServletRequest, C
 	}
 
 	@Override
-	protected ConnexionServletRequest getRequest(final String data) {
-		return Constantes.GSON.fromJson(data, ConnexionServletRequest.class);
+	protected ConnexionRequest getRequest(final String data) {
+		return Constantes.GSON.fromJson(data, ConnexionRequest.class);
 	}
 
 }

@@ -1,31 +1,29 @@
 /*global define */
-define(["jquery", "app/model/game/inventoryModel"], 
-function($, Inventory) {
+define(["jquery", 
+        "app/model/game/inventoryModel",
+        "app/model/game/terrainModel"], 
+function($, Inventory, Terrain) {
 	'use strict';
 
 	return function() {
-	    this.terrain = null;
+	    this.terrain = new Terrain();
+	    
 	    this.main = {
 	    		droite : null,
 	    		gauche : null,
 	    		graine : null,
 	    		current : null
 	    };
-	    this.inventaire = new Inventory();
+	    this.inventory = new Inventory();
 	    
-	    this.refresh = function(data) {
-	    	this.terrain = data.terrain;
-	    };
-	    
-	    this.addToInventory = function(itemName) {
-	    	var item = ItemsData.get(itemName);
-	    	if (item) this.inventory.put(item);
+	    this.addToInventory = function(itemId) {
+	    	this.inventory.put(itemId);
 	    };
 	    /**
 	     * Choisit l'item et le place dans une main
 	     */
-	    this.pickItem = function(itemName) {
-	    	var item = this.inventory.get(itemName);
+	    this.pickItem = function(itemId) {
+	    	var item = this.inventory.get(itemId);
 	    	// Si c'est une graine, on le place dans la poche a graine
 	    	if (item.isGraine) {
 	    		this.main.graine = item;
@@ -55,8 +53,8 @@ function($, Inventory) {
 	    	$(".interface-outils ul .outil#"+main).addClass("choose");
 	    };
 	    this.useCurrentTool = function(x, y) {
-	    	if (this.main.current) {
-	    		this.main.current.use(this.terrain, x, y);
+	        if (this.main.current) {
+	            this.main.current.use(this, x, y);
 	    	}
 	    };
 	};

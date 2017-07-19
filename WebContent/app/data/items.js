@@ -8,8 +8,8 @@ define(["jquery"], function($){
 			"name" : "Pelle",
 			"texte" : ["Une belle pelle en bois d'acajou magique."],
 			"img" : "app/img/item/tools/pelle",
-			"use" : function(terrain, x, y) {
-				terrain.sol[y][x] = "trou";
+			"use" : function(player, x, y) {
+			    player.terrain.update("sol", x, y, "trou")
 			},
 			"isGraine" : false
 		}
