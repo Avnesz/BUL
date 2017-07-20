@@ -110,6 +110,12 @@
         <filter-name>CheckMdpAdmin</filter-name>
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
+    
+    <servlet>
+	    <servlet-name>InitServlet</servlet-name>
+	    <servlet-class>servlet.init.InitServlet</servlet-class>
+	    <load-on-startup>0</load-on-startup>
+	</servlet> 
 
     <!-- Index -->
     <welcome-file-list>
