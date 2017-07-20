@@ -1,7 +1,9 @@
 package servlet.refreshMap;
 
+import java.util.List;
+
 import servlet.abstrait.GeneralResponse;
-import bean.TerrainChanged;
+import bean.TerrainModification;
 
 /**
  * reponse de raffraichissement de terrain
@@ -10,19 +12,20 @@ import bean.TerrainChanged;
  * 
  */
 public class RefreshMapResponse extends GeneralResponse {
-    private TerrainChanged newTerrain;
+    private List<TerrainModification> modifications;
 
     /**
-     * @return the newTerrain
+     * @return the modifications
      */
-    public TerrainChanged getNewTerrain() {
-        return newTerrain;
+    public List<TerrainModification> getModifications() {
+        return modifications;
     }
 
     /**
-     * @param newTerrain the newTerrain to set
+     * @param modifications
+     *            the modifications to set
      */
-    public void setNewTerrain(final TerrainChanged newTerrain) {
-        this.newTerrain = newTerrain;
+    public void setModifications(final List<TerrainModification> modifications) {
+        this.modifications = modifications;
     }
 }

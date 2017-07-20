@@ -39,7 +39,7 @@ function($, _, Utils, ViewUtils, MessageUtils, page, Model, InscriptionView, Gam
 					if (data.codeRetour != 0) {
 						MessageUtils.show(data.message, "danger");
 					}else {
-						that.game = new Game();
+						that.game = new Game(data.token);
 					}
 				});
 			});

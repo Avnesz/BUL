@@ -9,7 +9,7 @@ define(["jquery"], function($){
 			"texte" : ["Une belle pelle en bois d'acajou magique."],
 			"img" : "app/img/item/tools/pelle",
 			"use" : function(player, x, y) {
-			    player.terrain.update("sol", x, y, "trou")
+			    player.terrain.modify("sol", x, y, "trou")
 			},
 			"isGraine" : false
 		}

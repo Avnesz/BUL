@@ -5,14 +5,11 @@ function($) {
 
 	return function() {
 	    this.terrain = null;
-	    this.modifications = {
-	            sousSol : [],
-	            sol : [],
-	            layer1 : []
-	    };
+	    this.modifications = [];
 	    
-	    this.get = function(layer) {
-            return this.terrain[layer];  
+	    this.get = function(x, y) {
+	        if (x != undefined && y != undefined) return this.terrain.layers[y][x]; 
+            return this.terrain.layers;  
         };
 	    
 	    this.create = function(terrain) {
@@ -20,22 +17,21 @@ function($) {
 	    };
 	    
 	    this.resetModification = function() {
-	        this.modifications.sousSol = [];
-	        this.modifications.sol = [];
-	        this.modifications.layer1 = [];
+	        this.modifications = [];
+	    };
+	    
+	    this.modify = function(layer, x, y, id) {
+	        this.modifications.push({
+	            x : x,
+	            y : y,
+	            id : id,
+	            layer : layer
+	        });
 	    };
 	    
 	    this.update = function(layer, x, y, id) {
-	        var modifyLayer = this.modifications[layer];
-	        modifyLayer.push({
-	            x: x,
-	            y: y,
-	            id : id
-	        });
-	        
-	        //var terrainLayer = this.terrain[layer];
-	        //terrainLayer[y][x] = id;
-	        //$("#"+layer).find(".tile[x="+x+"][y="+y+"]").attr("class", "tile "+id);
-	    };
+	        var terrainLayers = this.get(x, y);
+            terrainLayers[layer].id = id;
+        };
 	};
 });

@@ -1,6 +1,9 @@
 package servlet.refreshMap;
 
-import bean.TerrainChanged;
+import java.util.List;
+
+import bean.TerrainModification;
+import filter.checkConnect.ConnectFilterRequest;
 
 /**
  * Requete de connexion
@@ -8,10 +11,10 @@ import bean.TerrainChanged;
  * @author Mayitabel
  * 
  */
-public class RefreshMapRequest {
+public class RefreshMapRequest extends ConnectFilterRequest {
     private String proprietaire;
     private long lastVersion;
-    private TerrainChanged modifications;
+    private List<TerrainModification> modifications;
 
     /**
      * @return the proprietaire
@@ -46,14 +49,15 @@ public class RefreshMapRequest {
     /**
      * @return the modifications
      */
-    public TerrainChanged getModifications() {
+    public List<TerrainModification> getModifications() {
         return modifications;
     }
 
     /**
      * @param modifications the modifications to set
      */
-    public void setModifications(TerrainChanged modifications) {
+    public void setModifications(final List<TerrainModification> modifications) {
         this.modifications = modifications;
     }
+
 }

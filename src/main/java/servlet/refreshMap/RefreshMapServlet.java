@@ -1,6 +1,7 @@
 package servlet.refreshMap;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import utils.Constantes;
 import utils.Logger;
 import utils.SessionUtils;
 import bdd.TerrainDAO;
-import bean.TerrainChanged;
+import bean.TerrainModification;
 
 /**
  * Controller permettant de se connecter
@@ -59,9 +60,10 @@ public class RefreshMapServlet extends AbstractServlet<RefreshMapRequest, Refres
          * Puis on recharge
          */
         try {
-            final TerrainChanged newTerrain = TerrainDAO.getInstance().getNewVersion(request.getProprietaire(),
+            final List<TerrainModification> modifications = TerrainDAO.getInstance().getNewVersion(
+                    request.getProprietaire(),
                     request.getLastVersion(), login);
-            response.setNewTerrain(newTerrain);
+            response.setModifications(modifications);
         } catch (final GeneralException e) {
             logger.log(Level.WARNING,
                     "Impossible de recuperer la nouvelle version du terrain de : " + request.getProprietaire()

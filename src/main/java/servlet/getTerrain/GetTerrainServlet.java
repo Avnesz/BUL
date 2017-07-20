@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 
 import servlet.abstrait.AbstractServlet;
 import servlet.abstrait.GeneralException;
+import utils.Constantes;
 import utils.Logger;
 import utils.SessionUtils;
 import bdd.TerrainDAO;
@@ -21,21 +22,21 @@ import bean.Terrain;
  * @author Mayitabel
  * 
  */
-public class GetTerrainServlet extends AbstractServlet<String, GetTerrainResponse> {
+public class GetTerrainServlet extends AbstractServlet<GetTerrainRequest, GetTerrainResponse> {
     private static final long serialVersionUID = -4647019705021722992L;
     private final Logger logger = new Logger(GetTerrainServlet.class.getName());
 
     @Override
-    protected GetTerrainResponse doGet(final String request) throws ServletException, IOException {
+    protected GetTerrainResponse doGet(final GetTerrainRequest request) throws ServletException, IOException {
         return null;
     }
 
     @Override
-    protected GetTerrainResponse doPost(final String request) throws ServletException, IOException {
+    protected GetTerrainResponse doPost(final GetTerrainRequest request) throws ServletException, IOException {
         final GetTerrainResponse response = new GetTerrainResponse();
 
         try {
-            String proprietaire = request;
+            String proprietaire = request.getProprietaire();
             if (StringUtils.isEmpty(proprietaire) || "null".equals(proprietaire)) {
                 final Player player = SessionUtils.getInstance(httpRequest).getPlayer();
                 proprietaire = player.getLogin();
@@ -52,8 +53,8 @@ public class GetTerrainServlet extends AbstractServlet<String, GetTerrainRespons
     }
 
     @Override
-    protected String getRequest(final String data) {
-        return data;
+    protected GetTerrainRequest getRequest(final String data) {
+        return Constantes.GSON.fromJson(data, GetTerrainRequest.class);
     }
 
 }

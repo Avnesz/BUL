@@ -22,7 +22,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>GetTerrainServlet</servlet-name>
-        <url-pattern>/getTerrain</url-pattern>
+        <url-pattern>/connect/getTerrain</url-pattern>
     </servlet-mapping>
 
   	<!-- refreshMap -->
@@ -32,7 +32,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RefreshMapServlet</servlet-name>
-        <url-pattern>/refreshMap</url-pattern>
+        <url-pattern>/connect/refreshMap</url-pattern>
     </servlet-mapping>
 
     <!-- Filtres -->

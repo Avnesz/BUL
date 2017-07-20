@@ -5,9 +5,9 @@ define(["jquery",
 function($, Inventory, Terrain) {
 	'use strict';
 
-	return function() {
+	return function(token) {
+	    this.token = null;
 	    this.terrain = new Terrain();
-	    
 	    this.main = {
 	    		droite : null,
 	    		gauche : null,
@@ -15,6 +15,10 @@ function($, Inventory, Terrain) {
 	    		current : null
 	    };
 	    this.inventory = new Inventory();
+	    
+	    this.init = function(token) {
+	        this.token = token;
+	    };
 	    
 	    this.addToInventory = function(itemId) {
 	    	this.inventory.put(itemId);
@@ -57,5 +61,7 @@ function($, Inventory, Terrain) {
 	            this.main.current.use(this, x, y);
 	    	}
 	    };
+	    
+	    this.init(token);
 	};
 });

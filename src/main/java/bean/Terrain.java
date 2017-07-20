@@ -5,9 +5,7 @@ import java.util.Map;
 public class Terrain {
     private long version;
     private String proprietaire;
-    private Map<Integer, Map<Integer, Tuile>> sousSol;
-    private Map<Integer, Map<Integer, Tuile>> sol;
-    private Map<Integer, Map<Integer, Tuile>> layer1;
+    private Map<Integer, Map<Integer, Layers>> layers;
 
 	/**
      * @return the version
@@ -19,7 +17,7 @@ public class Terrain {
     /**
      * @param version the version to set
      */
-    public void setVersion(long version) {
+    public void setVersion(final long version) {
         this.version = version;
     }
 
@@ -38,47 +36,16 @@ public class Terrain {
     }
 
     /**
-     * @return the sousSol
+     * @return the layers
      */
-    public Map<Integer, Map<Integer, Tuile>> getSousSol() {
-        return sousSol;
+    public Map<Integer, Map<Integer, Layers>> getLayers() {
+        return layers;
     }
 
     /**
-     * @param sousSol
-     *            the sousSol to set
+     * @param layers the layers to set
      */
-    public void setSousSol(final Map<Integer, Map<Integer, Tuile>> sousSol) {
-        this.sousSol = sousSol;
-    }
-
-    /**
-     * @return the sol
-     */
-    public Map<Integer, Map<Integer, Tuile>> getSol() {
-        return sol;
-    }
-
-    /**
-     * @param sol
-     *            the sol to set
-     */
-    public void setSol(final Map<Integer, Map<Integer, Tuile>> sol) {
-        this.sol = sol;
-    }
-
-    /**
-     * @return the layer1
-     */
-    public Map<Integer, Map<Integer, Tuile>> getLayer1() {
-        return layer1;
-    }
-
-    /**
-     * @param layer1
-     *            the layer1 to set
-     */
-    public void setLayer1(final Map<Integer, Map<Integer, Tuile>> layer1) {
-        this.layer1 = layer1;
+    public void setLayers(Map<Integer, Map<Integer, Layers>> layers) {
+        this.layers = layers;
     }
 }

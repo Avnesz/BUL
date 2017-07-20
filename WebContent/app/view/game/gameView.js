@@ -10,11 +10,11 @@ define(["jquery",
 function($, _, Utils, page, Didactitiel, Interface, MapView, PlayerModel) {
 	'use strict';
 
-	return function() {
-		this.init = function() {
+	return function(token) {
+		this.init = function(token) {
 			this.el = $("#app");
 			Utils.load("track", {"where" : "Lancement du jeu"}, function(data) {}, "POST");
-			this.player = new PlayerModel();
+			this.player = new PlayerModel(token);
 			this.render();
 		};
 
@@ -34,6 +34,6 @@ function($, _, Utils, page, Didactitiel, Interface, MapView, PlayerModel) {
 			}
 		};
 		
-		this.init();
+		this.init(token);
 	};
 });

@@ -11,8 +11,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import servlet.abstrait.GeneralException;
 import utils.Constantes;
 import utils.JsonUtils;
+import bean.Layers;
 import bean.Terrain;
-import bean.TerrainChanged;
+import bean.TerrainModification;
 import bean.TerrainVierge;
 import bean.Tuile;
 
@@ -112,50 +113,85 @@ public class TerrainDAO {
         return terrain;
     }
 
-    public void update(final String idModifier, final String proprietaire, final TerrainChanged terrainChanged)
-            throws GeneralException {
-        final Terrain oldTerrain = getTerrain(proprietaire, false);
-        updateLayer(idModifier, oldTerrain.getSousSol(), terrainChanged.getSousSol());
-        updateLayer(idModifier, oldTerrain.getSol(), terrainChanged.getSol());
-        updateLayer(idModifier, oldTerrain.getLayer1(), terrainChanged.getLayer1());
-    }
-
-    private void updateLayer(final String idModifier, final Map<Integer, Map<Integer, Tuile>> oldLayer,
-            final List<Tuile> newLayer) {
-        for (final Tuile newTile : newLayer) {
-            final Tuile oldTile = oldLayer.get(newTile.getY()).get(newTile.getX());
-            oldTile.setId(newTile.getId());
-            oldTile.setIdModifier(idModifier);
-            oldTile.setVersion(new Date().getTime());
+    /**
+     * Permet d'inclure des mise à jour au terrain d'un joueur
+     * 
+     * @param idModifier
+     * @param proprietaire
+     * @param modifications
+     * @throws GeneralException
+     */
+    public void update(final String idModifier, final String proprietaire,
+            final List<TerrainModification> modifications) throws GeneralException {
+        final Map<Integer, Map<Integer, Layers>> oldTerrain = getTerrain(proprietaire, false).getLayers();
+        for (final TerrainModification modification : modifications) {
+            final Layers oldLayers = oldTerrain.get(modification.getY()).get(modification.getX());
+            updateTile(idModifier, oldLayers.getTuileByLayer(modification.getLayer()), modification);
         }
     }
 
-    public TerrainChanged getNewVersion(final String proprietaire, final long lastVersion, final String login)
-            throws GeneralException {
-        final Terrain terrain = getTerrain(proprietaire, false);
-
-        final TerrainChanged newTerrain = new TerrainChanged();
-        newTerrain.setSousSol(getNewLayer(terrain.getSousSol(), lastVersion, login));
-        newTerrain.setSol(getNewLayer(terrain.getSol(), lastVersion, login));
-        newTerrain.setLayer1(getNewLayer(terrain.getLayer1(), lastVersion, login));
-
-        return newTerrain;
+    /**
+     * Mise à jour d'une tuile
+     * 
+     * @param idModifier
+     * @param oldTile
+     * @param modification
+     */
+    private void updateTile(final String idModifier, final Tuile oldTile, final TerrainModification modification) {
+        oldTile.setId(modification.getId());
+        oldTile.setIdModifier(idModifier);
+        oldTile.setVersion(new Date().getTime());
     }
 
-    private List<Tuile> getNewLayer(final Map<Integer, Map<Integer, Tuile>> layer,
-            final long lastVersion, final String login) {
-        final List<Tuile> newLayer = new ArrayList<>();
-        for (final Entry<Integer, Map<Integer, Tuile>> lineEntry : layer.entrySet()) {
-            final Map<Integer, Tuile> line = lineEntry.getValue();
-            for (final Entry<Integer, Tuile> tileEntry : line.entrySet()) {
-                final Tuile tile = tileEntry.getValue();
-                if (tile.getVersion() > lastVersion) {
-                    tile.setX(tileEntry.getKey());
-                    tile.setY(lineEntry.getKey());
-                    newLayer.add(tile);
-                }
+    /**
+     * Renvoi la nouvelle version du terrain
+     * 
+     * @param proprietaire
+     * @param lastVersion
+     * @param login
+     * @return
+     * @throws GeneralException
+     */
+    public List<TerrainModification> getNewVersion(final String proprietaire, final long lastVersion,
+            final String login)
+            throws GeneralException {
+        final List<TerrainModification> modifications = new ArrayList<>();
+        final Map<Integer, Map<Integer, Layers>> terrain = getTerrain(proprietaire, false).getLayers();
+
+        for (final Entry<Integer, Map<Integer, Layers>> lineEntry : terrain.entrySet()) {
+            final Map<Integer, Layers> line = lineEntry.getValue();
+            for (final Entry<Integer, Layers> tileEntry : line.entrySet()) {
+                final Layers layers = tileEntry.getValue();
+                final int x = tileEntry.getKey();
+                final int y = lineEntry.getKey();
+                addModification(modifications, x, y, lastVersion, layers.getSousSol(), "sousSol");
+                addModification(modifications, x, y, lastVersion, layers.getSol(), "sol");
+                addModification(modifications, x, y, lastVersion, layers.getLayer1(), "layer1");
             }
         }
-        return newLayer;
+
+        return modifications;
+    }
+
+    /**
+     * Ajoute une modification a la liste
+     * 
+     * @param modifications
+     * @param x
+     * @param y
+     * @param lastVersion
+     * @param tuile
+     * @param layerName
+     */
+    private void addModification(final List<TerrainModification> modifications, final int x, final int y,
+            final long lastVersion, final Tuile tuile, final String layerName) {
+        if (tuile.getVersion() > lastVersion) {
+            final TerrainModification modification = new TerrainModification();
+            modification.setX(x);
+            modification.setY(y);
+            modification.setId(tuile.getId());
+            modification.setLayer(layerName);
+            modifications.add(modification);
+        }
     }
 }

@@ -7,15 +7,18 @@ function($, Utils) {
 	    this.data = {
 	        proprietaire : null,
 	        lastVersion : null,
-    	    modifications : null
+    	    modifications : null,
+    	    token : null
 	    };
 	    
-	    this.send = function(proprietaire, terrain, success) {
+	    this.send = function(proprietaire, player, success) {
+	        var terrain = player.terrain;
 	        this.data.proprietaire = proprietaire;
 	        this.data.lastVersion = terrain.version;
 	        this.data.modifications = terrain.modifications;
+	        this.data.token = player.token;
 	        
-	        Utils.load("refreshMap", this.data, function(data) {
+	        Utils.load("connect/refreshMap", this.data, function(data) {
 	            terrain.resetModification();
 	            success(data);
             }, "POST");
