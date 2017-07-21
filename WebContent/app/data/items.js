@@ -1,17 +1,20 @@
 'use strict';
-define(["jquery"], function($){
+define(["jquery", "app/data/tools"], function($, ToolsData){
 	var data = {
 		/**
 		 * Outils
 		 */
-		"pelle" : {
-			"name" : "Pelle",
-			"texte" : ["Une belle pelle en bois d'acajou magique."],
-			"img" : "app/img/item/tools/pelle",
+		"fleur" : {
+			"name" : "Fleur",
+			"texte" : ["Une jolie fleur a replanter."],
 			"use" : function(player, x, y) {
-			    player.terrain.modify("sol", x, y, "trou")
+			    var layers = player.terrain.get(x, y);
+			    if (layers.sol.id === "herbe") {
+			        player.terrain.modify("layer1", x, y, "fleur");
+			    }
 			},
-			"isGraine" : false
+			"isGraine" : true,
+			"consommable" : true
 		}
 	};
 	
@@ -20,7 +23,10 @@ define(["jquery"], function($){
 		* Permet d'appeler un WS
 		**/
 		get : function(key) {
-			return $.extend(true, {}, data[key]);
+			var item = ToolsData.get(key);
+			if (item.name) return item;
+		    
+		    return $.extend(true, {}, data[key]);
 		}
 	};
 });

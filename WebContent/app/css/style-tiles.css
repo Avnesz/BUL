@@ -8,49 +8,33 @@
 	display: inline-block;
 	width: 32px;
 	height: 32px;
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .herbe {
 	background-image: url("../img/tiles/herbe.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .eau {
 	background-image: url("../img/tiles/eau.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .trou {
 	background-image: url("../img/tiles/trou.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .fleur {
 	background-image: url("../img/tiles/fleur.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .buisson-vert {
 	background-image: url("../img/tiles/buisson-vert.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .buisson-bleu {
 	background-image: url("../img/tiles/buisson-bleu.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .buisson-jaune {
 	background-image: url("../img/tiles/buisson-jaune.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .buisson-orange {
 	background-image: url("../img/tiles/buisson-orange.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 .buisson-rouge {
 	background-image: url("../img/tiles/buisson-rouge.png");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }

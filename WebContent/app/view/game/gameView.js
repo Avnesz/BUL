@@ -32,6 +32,11 @@ function($, _, Utils, page, Didactitiel, Interface, MapView, PlayerModel) {
 			if (firstTime) {
 				this.didactitiel = new Didactitiel(this);
 			}
+			
+			this.player.addToInventory("pelle");
+			this.player.addToInventory("fleur", 5);
+            this.player.pickItem("pelle");
+            this.player.pickItem("fleur");
 		};
 		
 		this.init(token);

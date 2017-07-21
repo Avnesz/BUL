@@ -91,7 +91,6 @@ function($, _, Utils, GetTerrainModel) {
                     var layer = modification.layer;
                     
                     this.terrain.update(layer, x, y, id);
-                    $("#"+layer).find(".tile[x="+x+"][y="+y+"]").attr("class", "tile "+id);
                 }
             }
         };

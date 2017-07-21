@@ -35,23 +35,23 @@ public class RefreshMapServlet extends AbstractServlet<RefreshMapRequest, Refres
 			IOException {
 		final RefreshMapResponse response = new RefreshMapResponse();
 
-        final String login = SessionUtils.getInstance(httpRequest).getPlayer().getLogin();
+        final String me = SessionUtils.getInstance(httpRequest).getPlayer().getLogin();
 
         /**
          * Si le proprietaire est null, cela signifie que l'utilisateur connecté est le proprietaire
          */
         if (request.getProprietaire() == null) {
-            request.setProprietaire(login);
+            request.setProprietaire(me);
         }
 
         /**
          * D'abord si l'utilisateur possede les droits de modifications on modifie
          */
         try {
-            TerrainDAO.getInstance().update(login, request.getProprietaire(), request.getModifications());
+            TerrainDAO.getInstance().update(request.getProprietaire(), request.getModifications(), me);
         } catch (final GeneralException e) {
             logger.log(Level.WARNING, "Impossible de raffraichir le terrain de : " + request.getProprietaire()
-                    + " avec " + login);
+                    + " avec " + me);
             response.setCodeRetour(-1);
             response.setMessage("Impossible de raffraichir le terrain");
         }
@@ -62,12 +62,12 @@ public class RefreshMapServlet extends AbstractServlet<RefreshMapRequest, Refres
         try {
             final List<TerrainModification> modifications = TerrainDAO.getInstance().getNewVersion(
                     request.getProprietaire(),
-                    request.getLastVersion(), login);
+ request.getLastVersion(), me);
             response.setModifications(modifications);
         } catch (final GeneralException e) {
             logger.log(Level.WARNING,
                     "Impossible de recuperer la nouvelle version du terrain de : " + request.getProprietaire()
-                            + " avec " + login);
+                            + " avec " + me);
             response.setCodeRetour(-1);
             response.setMessage("Impossible de recuperer la nouvelle version du terrain");
         }

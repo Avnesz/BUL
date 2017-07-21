@@ -5,16 +5,18 @@ function($) {
 
 	return function(item, nbr) {
 	    this.item = null;
-	    this.nbr = 0;
+	    this.nbr = 1;
 	    
 	    this.init = function(item, nbr) {
 	    	this.item = item;
 	    	if (nbr) this.nbr = nbr;
-	    	else this.nbr = 1;
 	    };
 	    
 	    this.add = function(nbr) {
 	    	this.nbr += nbr;
+	    };
+	    this.remove = function(nbr) {
+	        this.nbr -= nbr;
 	    };
 
 	    this.use = function(player, x, y) {

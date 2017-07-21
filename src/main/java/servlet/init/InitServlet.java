@@ -43,7 +43,7 @@ public class InitServlet extends HttpServlet {
                     logger.log(Level.WARNING, "Impossible de sauvegarder les données du server");
                 }
             }
-        }, 0, MINUTE);
+        }, 0, 5 * MINUTE);
 	}
 
 }

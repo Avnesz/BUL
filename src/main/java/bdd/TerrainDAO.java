@@ -121,12 +121,12 @@ public class TerrainDAO {
      * @param modifications
      * @throws GeneralException
      */
-    public void update(final String idModifier, final String proprietaire,
-            final List<TerrainModification> modifications) throws GeneralException {
+    public void update(final String proprietaire, final List<TerrainModification> modifications,
+            final String idModifier) throws GeneralException {
         final Map<Integer, Map<Integer, Layers>> oldTerrain = getTerrain(proprietaire, false).getLayers();
         for (final TerrainModification modification : modifications) {
             final Layers oldLayers = oldTerrain.get(modification.getY()).get(modification.getX());
-            updateTile(idModifier, oldLayers.getTuileByLayer(modification.getLayer()), modification);
+            updateTile(oldLayers.getTuileByLayer(modification.getLayer()), modification, idModifier);
         }
     }
 
@@ -137,7 +137,7 @@ public class TerrainDAO {
      * @param oldTile
      * @param modification
      */
-    private void updateTile(final String idModifier, final Tuile oldTile, final TerrainModification modification) {
+    private void updateTile(final Tuile oldTile, final TerrainModification modification, final String idModifier) {
         oldTile.setId(modification.getId());
         oldTile.setIdModifier(idModifier);
         oldTile.setVersion(new Date().getTime());
@@ -153,7 +153,7 @@ public class TerrainDAO {
      * @throws GeneralException
      */
     public List<TerrainModification> getNewVersion(final String proprietaire, final long lastVersion,
-            final String login)
+            final String me)
             throws GeneralException {
         final List<TerrainModification> modifications = new ArrayList<>();
         final Map<Integer, Map<Integer, Layers>> terrain = getTerrain(proprietaire, false).getLayers();
@@ -164,9 +164,9 @@ public class TerrainDAO {
                 final Layers layers = tileEntry.getValue();
                 final int x = tileEntry.getKey();
                 final int y = lineEntry.getKey();
-                addModification(modifications, x, y, lastVersion, layers.getSousSol(), "sousSol");
-                addModification(modifications, x, y, lastVersion, layers.getSol(), "sol");
-                addModification(modifications, x, y, lastVersion, layers.getLayer1(), "layer1");
+                addModification(modifications, x, y, lastVersion, layers.getSousSol(), me);
+                addModification(modifications, x, y, lastVersion, layers.getSol(), me);
+                addModification(modifications, x, y, lastVersion, layers.getLayer1(), me);
             }
         }
 
@@ -181,16 +181,17 @@ public class TerrainDAO {
      * @param y
      * @param lastVersion
      * @param tuile
+     * @param me
      * @param layerName
      */
     private void addModification(final List<TerrainModification> modifications, final int x, final int y,
-            final long lastVersion, final Tuile tuile, final String layerName) {
-        if (tuile.getVersion() > lastVersion) {
+            final long lastVersion, final Tuile tuile, final String me) {
+        if (tuile.getVersion() > lastVersion && !me.equals(tuile.getIdModifier())) {
             final TerrainModification modification = new TerrainModification();
             modification.setX(x);
             modification.setY(y);
             modification.setId(tuile.getId());
-            modification.setLayer(layerName);
+            modification.setLayer(tuile.getLayerName());
             modifications.add(modification);
         }
     }

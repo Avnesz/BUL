@@ -14,8 +14,6 @@ function($, _, page, MouseModel, CameraModel, Terrain, RefreshMapModel) {
 		this.init = function(parent) {
 			this.parent = parent;
 			this.player = parent.player;
-			this.player.addToInventory("pelle");
-			this.player.pickItem("pelle");
 			
 			this.el = $("#map");
 			

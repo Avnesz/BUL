@@ -27,11 +27,13 @@ function($) {
 	            id : id,
 	            layer : layer
 	        });
+	        this.update(layer, x, y, id);
 	    };
 	    
 	    this.update = function(layer, x, y, id) {
 	        var terrainLayers = this.get(x, y);
             terrainLayers[layer].id = id;
+            $("#"+layer).find(".tile[x="+x+"][y="+y+"]").attr("class", "tile "+id);
         };
 	};
 });
