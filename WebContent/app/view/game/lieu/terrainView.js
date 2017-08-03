@@ -98,9 +98,7 @@ function($, _, Utils, GetTerrainModel) {
         this.makeEvents = function() {
         	var that = this;
         	$(".tile").click(function() {
-        		var x = $(this).attr("x");
-        		var y = $(this).attr("y");
-        		that.player.useCurrentTool(x, y);
+        		that.player.move($(this).offset());
         	});
         };
 		

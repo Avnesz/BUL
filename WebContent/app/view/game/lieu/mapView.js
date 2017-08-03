@@ -2,12 +2,13 @@
 define(["jquery",
         'underscore',
         "text!app/template/game/lieu/map.html",
-        "app/model/game/mouseModel",
-        "app/model/game/cameraModel",
+        "app/model/game/ui/mouseModel",
+        "app/model/game/ui/cameraModel",
         "app/view/game/lieu/terrainView",
+        "app/view/game/player/playerView",
         "app/model/game/server/refreshMapModel",
         "jquery-mousewheel"],
-function($, _, page, MouseModel, CameraModel, Terrain, RefreshMapModel) {
+function($, _, page, MouseModel, CameraModel, Terrain, PlayerView, RefreshMapModel) {
 	'use strict';
 
 	return function(parent) {
@@ -22,6 +23,7 @@ function($, _, page, MouseModel, CameraModel, Terrain, RefreshMapModel) {
 			this.refreshMapModel = new RefreshMapModel();
 			
 			this.terrain = new Terrain(this);
+			this.playerView = new PlayerView(this);
 			
 			this.render();
 		};
@@ -52,7 +54,10 @@ function($, _, page, MouseModel, CameraModel, Terrain, RefreshMapModel) {
 		    var that = this;
 
 		    this.refreshMapModel.send(null, this.player, function(data) {
-		        if (data.codeRetour == 0) that.terrain.refresh(data.modifications);
+		    	if (data.codeRetour == 0) {
+		        	that.terrain.refresh(data.modifications);
+		        	that.playerView.refresh();
+		        }
 		    });
 		    
 		    setTimeout(function() {

@@ -2,6 +2,7 @@
 define(["jquery"], function($, ToolsData){
 	var data = {
 		"pelle" : {
+			"id" : "pelle",
 			"name" : "Pelle",
 			"texte" : ["Une belle pelle en bois d'acajou magique."],
 			"use" : function(player, x, y) {

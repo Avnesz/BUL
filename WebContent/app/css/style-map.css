@@ -22,8 +22,18 @@
 	background-image: url("../img/tiles/herbe.png");
 	background-repeat: repeat;
 	background-size: 32px 32px;
+	z-index: -10;
 }
 .layer#terrain {
 	left: 0;
 	top: 0;
+}
+.layer#sousSol {
+	z-index: 0;
+}
+.layer#sol {
+	z-index: 10;
+}
+.layer#layer1 {
+	z-index: 20;
 }

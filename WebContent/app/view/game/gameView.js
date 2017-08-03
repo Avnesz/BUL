@@ -6,7 +6,7 @@ define(["jquery",
         "app/view/game/didactitiel/initView",
         "app/view/game/interface/interfaceView",
         "app/view/game/lieu/mapView",
-        "app/model/game/playerModel"],
+        "app/model/game/player/playerModel"],
 function($, _, Utils, page, Didactitiel, Interface, MapView, PlayerModel) {
 	'use strict';
 

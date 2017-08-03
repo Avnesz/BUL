@@ -1,6 +1,6 @@
 /*global define */
-define(["jquery", "app/model/game/inventoryEntry", "app/data/items"], 
-function($, InventoryEntry, ItemsData) {
+define(["jquery", "app/data/items"], 
+function($, ItemsData) {
 	'use strict';
 
 	return function() {
@@ -22,11 +22,12 @@ function($, InventoryEntry, ItemsData) {
 	        
 	        var item = ItemsData.get(itemId);
 	    	if (item) {
-		    	var itemFound = this.get(itemId);
+	    		var itemFound = this.get(itemId);
 		    	if (itemFound) {
-		    		itemFound.add(nbr);
+		    		itemFound.nbr += nbr;
 		    	}else {
-		    	    this.map[itemId] = new InventoryEntry(item, nbr);
+		    	    this.map[itemId] = item;
+		    	    this.map[itemId].nbr = nbr;
 		    	}
 	    	}
 	    };
@@ -36,24 +37,23 @@ function($, InventoryEntry, ItemsData) {
 	     * Si il n'y en a plus, le supprime de l'inventaire.
 	     */
 	    this.remove = function(itemId) {
-    		var entry = this.get(itemId);
-    		console.log("remove 1 : ", entry);
-    		if (entry) {
-    			entry.remove(1);
-    			if (entry.nbr <= 0) {
+    		var item = this.get(itemId);
+    		if (item) {
+    			item.nbr --;
+    			if (item.nbr <= 0) {
         			this.map.splice(this.map.indexOf(itemId), 1);
         		}
-    			return entry.nbr;
+    			return item.nbr;
     		}
     		return 0;
 	    };
 	    
 	    this.use = function(itemId, x, y, player) {
-	        var item = this.get(itemId).item;
+	        var item = this.get(itemId);
 	        if (item) {
-	            item.use(player, x, y);
-	            if (item.consommable) {
-                    this.remove(itemId)
+	            var used = item.use(player, x, y);
+	            if (used && item.consommable) {
+                    this.remove(itemId);
                 }
             }
 	    };

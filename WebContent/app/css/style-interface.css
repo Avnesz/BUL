@@ -1,3 +1,7 @@
+#interface div {
+	z-index: 100;
+}
+
 /**
 * Interface des outils
 **/

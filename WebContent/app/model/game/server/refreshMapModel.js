@@ -18,10 +18,10 @@ function($, Utils) {
 	        this.data.modifications = terrain.modifications;
 	        this.data.token = player.token;
 	        
-//	        Utils.load("connect/refreshMap", this.data, function(data) {
-//	            terrain.resetModification();
-//	            success(data);
-//            }, "POST");
+	        Utils.load("connect/refreshMap", this.data, function(data) {
+	            terrain.resetModification();
+	            success(data);
+            }, "POST");
 	    };
 	};
 });
