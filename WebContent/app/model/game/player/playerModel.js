@@ -16,6 +16,9 @@ function($, Inventory, Terrain, Equipement) {
 	    		y : 150
 	    };
 	    
+	    this.speed = 2;
+	    this.destination = null;
+	    
 	    this.init = function(token) {
 	        this.token = token;
 	    };
@@ -38,9 +41,10 @@ function($, Inventory, Terrain, Equipement) {
 	    };
 	    
 	    this.move = function(position) {
-	    	console.log("move player to : ", position);
-	    	this.position.x = position.left;
-	    	this.position.y = position.top;
+	        this.destination = {
+	                x : position.left,
+	                y : position.top
+	        };
 	    };
 	    
 	    this.init(token);
