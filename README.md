@@ -1,5 +1,5 @@
 # BUL
-"BUL" est un jeu par navigateur gratuit et sans attentes intempestives : http://lesjeuxdebebel.fr.nf/BUL
+"BULBE" est un jeu par navigateur gratuit et sans attentes intempestives : http://lesjeuxdebebel.fr.nf/BUL
 
 Il s'agit d'un jeu de gestion de terrain et de simulation de vie.
 
